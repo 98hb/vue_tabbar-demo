@@ -15,7 +15,11 @@
         <td>{{ scope.row.id }}</td>
         <td>{{ scope.row.goods_name }}</td>
         <td>{{ scope.row.goods_price }}</td>
-        <td>{{ scope.row.tags }}</td>
+        <td>
+          <span v-for="(str, ind) in scope.row.tags" :key="ind" class="color">
+            {{ str }}</span
+          >
+        </td>
         <td>
           <button class="btn btn-danger btn-sm">删除</button>
         </td>
@@ -53,4 +57,8 @@ export default {
 </script>
 
 <style>
+.color {
+  color: red;
+  background-color: orange;
+}
 </style>
