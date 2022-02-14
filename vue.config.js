@@ -1,5 +1,5 @@
 module.exports = {
-    devSever: {
+    devServer: {
         open: true
     },
     lintOnSave: false
