@@ -1,6 +1,12 @@
 <template>
   <div class="my-tab-bar">
-    <div class="tab-item" v-for="(obj, index) in arr" :key="index">
+    <div
+      class="tab-item"
+      v-for="(obj, index) in arr"
+      :key="index"
+      @click="btnFn(index)"
+      :class="{ current: index === selIndex }"
+    >
       <!-- 图标 -->
       <span class="iconfont" :class="obj.iconText"></span>
       <!-- 文字 -->
@@ -10,6 +16,10 @@
 </template>
 
 <script>
+// 目标:点谁谁亮
+// 1.绑定点击事件 - 传入索引值
+// 2.循环索引 - 保存索引 对比
+// 3.点击把索引值同步给selIndex变量上,引发上面判断的更新
 export default {
   props: {
     // ! (子) 1声明变量  (父传子)
@@ -27,6 +37,16 @@ export default {
           return false;
         }
       },
+    },
+  },
+  data() {
+    return {
+      selIndex: 0, //默认第一个高亮
+    };
+  },
+  methods: {
+    btnFn(index) {
+      this.selIndex = index; //点谁，就把谁的索引值保存起来
     },
   },
 };
