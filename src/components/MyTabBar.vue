@@ -4,7 +4,7 @@
       class="tab-item"
       v-for="(obj, index) in arr"
       :key="index"
-      @click="btnFn(index)"
+      @click="btnFn(index, obj)"
       :class="{ current: index === selIndex }"
     >
       <!-- 图标 -->
@@ -22,7 +22,7 @@
 // 3.点击把索引值同步给selIndex变量上,引发上面判断的更新
 export default {
   props: {
-    // ! (子) 1声明变量  (父传子)
+    // ! (子) a1声明变量  (父传子)
     arr: {
       type: Array,
       required: true,
@@ -45,8 +45,10 @@ export default {
     };
   },
   methods: {
-    btnFn(index) {
+    btnFn(index, theObj) {
       this.selIndex = index; //点谁，就把谁的索引值保存起来
+      this.$emit("changeCom", theObj.componentName);
+      //b1子(子传父) 要切换的组件名传APP.vue
     },
   },
 };
