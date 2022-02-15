@@ -16,6 +16,25 @@
         <td>{{ scope.row.goods_name }}</td>
         <td>{{ scope.row.goods_price }}</td>
         <td>
+          <input
+            class="tag-input form-control"
+            style="width: 100px"
+            type="text"
+            v-if="scope.row.inputVisible"
+            v-focus
+            @blur="scope.row.inputVisible = false"
+            @keydown.enter="enterFn(scope.row)"
+            v-model="scope.row.inputValue"
+            @keydown.esc="scope.row.inputValue = ''"
+          />
+          <button
+            style="display: block"
+            class="btn btn-primary btn-sm add-tag"
+            v-else
+            @click="scope.row.inputVisible = true"
+          >
+            +Tag
+          </button>
           <span v-for="(str, ind) in scope.row.tags" :key="ind" class="color">
             {{ str }}</span
           >
@@ -66,6 +85,16 @@ export default {
     removeBtn(id) {
       let index = this.list.findIndex((obj) => obj.id === id);
       this.list.splice(index, 1);
+    },
+    enterFn(obj) {
+      //回车
+      console.log(obj.inputValue);
+      if (obj.inputValue.trim().length === 0) {
+        alert("请输入数据");
+        return;
+      }
+      obj.tags.push(obj.inputValue); //表单里的字符串状态tags数组
+      obj.inputValue = "";
     },
   },
 };
