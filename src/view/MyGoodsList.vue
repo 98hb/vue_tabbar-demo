@@ -21,7 +21,12 @@
           >
         </td>
         <td>
-          <button class="btn btn-danger btn-sm">删除</button>
+          <button
+            class="btn btn-danger btn-sm"
+            @click="removeBtn(scope.row.id)"
+          >
+            删除
+          </button>
         </td>
       </template>
     </MyTable>
@@ -29,6 +34,10 @@
 </template>
 
 <script>
+// 目标:删除数据
+// 1.删除按钮 - 点击事件
+// 2.通过作用域插槽拿到id,实现点击事件方法
+// 3.通过id查找数组里数据,找到索引
 import MyTable from "../components/MyTable.vue";
 import axios from "axios";
 axios.defaults.baseURL = "https://www.escook.cn";
@@ -53,12 +62,17 @@ export default {
       this.list = res.data.data;
     });
   },
+  methods: {
+    removeBtn(id) {
+      let index = this.list.findIndex((obj) => obj.id === id);
+      this.list.splice(index, 1);
+    },
+  },
 };
 </script>
 
 <style>
 .color {
   color: red;
-  background-color: orange;
 }
 </style>
