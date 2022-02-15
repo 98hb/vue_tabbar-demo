@@ -35,7 +35,7 @@
           >
             +Tag
           </button>
-          <span v-for="(str, ind) in scope.row.tags" :key="ind" class="color">
+          <span v-for="(str, ind) in scope.row.tags" :key="ind" class="badge badge-warning">
             {{ str }}</span
           >
         </td>
@@ -101,7 +101,5 @@ export default {
 </script>
 
 <style>
-.color {
-  color: red;
-}
+
 </style>
